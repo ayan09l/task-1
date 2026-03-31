@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TripSmart Trip Itinerary Builder - Plan your perfect trip day by day. Add activities, hotels, and flights. Export your travel schedule.">
+    <title>Trip Itinerary Builder — TripSmart</title>
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/itinerary.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo"><span class="logo-icon">✈</span><span class="logo-name">TripSmart</span></a>
+        <div class="nav-links">
+            <a href="flights.html">✈ Flights</a>
+            <a href="pricing.html">💰 Pricing</a>
+            <a href="recommendations.html">⭐ For You</a>
+            <a href="reviews.html">📝 Reviews</a>
+            <a href="itinerary.html" class="active">🗺️ Itinerary</a>
+            <a href="hotels.html">🏨 Hotels</a>
+        </div>
+        <button class="hamburger" id="hamburger">☰</button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="flights.html">✈ Flights</a>
+        <a href="pricing.html">💰 Pricing</a>
+        <a href="recommendations.html">⭐ For You</a>
+        <a href="reviews.html">📝 Reviews</a>
+        <a href="itinerary.html">🗺️ Itinerary</a>
+        <a href="hotels.html">🏨 Hotels</a>
+    </div>
+</nav>
+
+<main class="itin-main">
+    <div class="page-hero">
+        <div class="page-hero-inner">
+            <div class="page-badge">🗺️ Trip Planner</div>
+            <h1>Build Your <span class="gradient-text">Dream Itinerary</span></h1>
+            <p>Plan your entire trip day-by-day. Add activities, hotels, and flights. Everything in one place.</p>
+        </div>
+    </div>
+
+    <div class="itin-container">
+        <!-- Trip Setup -->
+        <div class="trip-setup">
+            <div class="ts-form">
+                <div class="form-group">
+                    <label>Trip Name</label>
+                    <input type="text" id="tripName" placeholder="e.g. Goa Beach Vacation 2026">
+                </div>
+                <div class="form-group">
+                    <label>Start Date</label>
+                    <input type="date" id="startDate">
+                </div>
+                <div class="form-group">
+                    <label>End Date</label>
+                    <input type="date" id="endDate">
+                </div>
+                <div class="form-group">
+                    <label>Destination</label>
+                    <input type="text" id="destination" placeholder="e.g. Goa, India">
+                </div>
+                <button class="create-trip-btn" id="createTripBtn">Create Trip →</button>
+            </div>
+        </div>
+
+        <!-- Trip Summary Bar -->
+        <div class="trip-summary-bar" id="tripSummaryBar" style="display:none">
+            <div class="tsb-item">
+                <div class="tsb-label">Trip</div>
+                <div class="tsb-val" id="tsb-name">—</div>
+            </div>
+            <div class="tsb-item">
+                <div class="tsb-label">Destination</div>
+                <div class="tsb-val" id="tsb-dest">—</div>
+            </div>
+            <div class="tsb-item">
+                <div class="tsb-label">Duration</div>
+                <div class="tsb-val" id="tsb-days">—</div>
+            </div>
+            <div class="tsb-item">
+                <div class="tsb-label">Activities</div>
+                <div class="tsb-val" id="tsb-activities">0</div>
+            </div>
+            <div class="tsb-item">
+                <div class="tsb-label">Est. Budget</div>
+                <div class="tsb-val" id="tsb-budget">₹0</div>
+            </div>
+            <div class="tsb-actions">
+                <button class="tsb-btn" onclick="ItineraryBuilder.exportPDF()">📄 Export</button>
+                <button class="tsb-btn danger" onclick="ItineraryBuilder.clearTrip()">🗑 Clear</button>
+            </div>
+        </div>
+
+        <!-- Day-by-day planner -->
+        <div class="days-planner" id="daysPlanner" style="display:none">
+            <div class="dp-sidebar">
+                <div class="dp-days-list" id="daysList"></div>
+            </div>
+            <div class="dp-content">
+                <div class="dp-day-header" id="dpDayHeader"></div>
+
+                <!-- Add Activity -->
+                <div class="add-activity-panel">
+                    <h4>+ Add to this day</h4>
+                    <div class="act-type-tabs">
+                        <button class="act-type active" data-type="activity">🎯 Activity</button>
+                        <button class="act-type" data-type="hotel">🏨 Hotel</button>
+                        <button class="act-type" data-type="flight">✈ Flight</button>
+                        <button class="act-type" data-type="food">🍽️ Food</button>
+                        <button class="act-type" data-type="transport">🚗 Transport</button>
+                    </div>
+                    <div class="act-form">
+                        <input type="text" id="actTitle" placeholder="Title (e.g. Visit Dudhsagar Waterfalls)">
+                        <input type="time" id="actTime" placeholder="Time">
+                        <input type="number" id="actCost" placeholder="Cost (₹)">
+                        <input type="text" id="actNote" placeholder="Notes (optional)">
+                        <button class="add-act-btn" id="addActBtn">Add →</button>
+                    </div>
+                </div>
+
+                <!-- Activities List -->
+                <div class="activities-list" id="activitiesList"></div>
+            </div>
+        </div>
+
+        <!-- Suggested Activities -->
+        <div class="suggestions-section" id="suggestionsSection" style="display:none">
+            <h3>💡 Suggested for your destination</h3>
+            <div class="suggestions-grid" id="suggestionsGrid"></div>
+        </div>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="footer-bottom"><p>© 2026 TripSmart · Trip Itinerary Builder</p></div>
+</footer>
+
+<!-- Print/Export area -->
+<div id="printArea" style="display:none"></div>
+
+<script src="js/itinerary.js"></script>
+<script>
+document.getElementById('hamburger').addEventListener('click', function() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+});
+</script>
+</body>
+</html>

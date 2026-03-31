@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TripSmart Dynamic Pricing Engine - See real-time price adjustments based on demand, seasonal trends, and peak travel periods with full price history graphs.">
+    <title>Dynamic Pricing Engine — TripSmart</title>
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/pricing.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo"><span class="logo-icon">✈</span><span class="logo-name">TripSmart</span></a>
+        <div class="nav-links">
+            <a href="flights.html">✈ Flights</a>
+            <a href="pricing.html" class="active">💰 Pricing</a>
+            <a href="recommendations.html">⭐ For You</a>
+            <a href="reviews.html">📝 Reviews</a>
+            <a href="itinerary.html">🗺️ Itinerary</a>
+            <a href="hotels.html">🏨 Hotels</a>
+        </div>
+        <button class="hamburger" id="hamburger">☰</button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="flights.html">✈ Live Flights</a>
+        <a href="pricing.html">💰 Dynamic Pricing</a>
+        <a href="recommendations.html">⭐ For You</a>
+        <a href="reviews.html">📝 Reviews</a>
+        <a href="itinerary.html">🗺️ Itinerary</a>
+        <a href="hotels.html">🏨 Hotels</a>
+    </div>
+</nav>
+
+<main class="pricing-main">
+    <!-- Page Header -->
+    <div class="page-hero">
+        <div class="page-hero-inner">
+            <div class="page-badge">💰 Smart Pricing</div>
+            <h1>Dynamic Pricing <span class="gradient-text">Engine</span></h1>
+            <p>Prices adjust automatically based on demand, seasons, and market trends. Track price history and book at the right moment.</p>
+        </div>
+    </div>
+
+    <!-- Route Selector + Live Price -->
+    <div class="pricing-container">
+
+        <!-- Controls -->
+        <div class="pricing-controls">
+            <div class="control-group">
+                <label>Route</label>
+                <select id="routeSelect">
+                    <option value="DEL-BOM">New Delhi → Mumbai</option>
+                    <option value="BOM-BLR">Mumbai → Bangalore</option>
+                    <option value="DEL-GOI">New Delhi → Goa</option>
+                    <option value="BOM-DXB">Mumbai → Dubai</option>
+                    <option value="DEL-SIN">New Delhi → Singapore</option>
+                    <option value="BLR-MAA">Bangalore → Chennai</option>
+                    <option value="HYD-GOI">Hyderabad → Goa</option>
+                    <option value="DEL-LHR">New Delhi → London</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label>Cabin Class</label>
+                <select id="cabinSelect">
+                    <option value="economy">Economy</option>
+                    <option value="business">Business</option>
+                    <option value="first">First Class</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label>Travel Date</label>
+                <input type="date" id="travelDate">
+            </div>
+            <button class="search-price-btn" id="searchPriceBtn">Check Price →</button>
+        </div>
+
+        <!-- Current Price Banner -->
+        <div class="price-banner" id="priceBanner">
+            <div class="pb-left">
+                <div class="pb-route" id="pbRoute">DEL → BOM</div>
+                <div class="pb-cabin" id="pbCabin">Economy · Round Trip</div>
+                <div class="pb-factors" id="pbFactors">
+                    <span class="factor-pill" id="f1">📅 Normal Season</span>
+                    <span class="factor-pill" id="f2">📊 Moderate Demand</span>
+                    <span class="factor-pill" id="f3">🕐 18 days ahead</span>
+                </div>
+            </div>
+            <div class="pb-right">
+                <div class="pb-label">Current Best Price</div>
+                <div class="pb-price" id="pbPrice">₹4,850</div>
+                <div class="pb-change" id="pbChange">
+                    <span class="change-badge" id="changeBadge"></span>
+                    <span id="changeText"></span>
+                </div>
+                <button class="book-btn" id="bookBtn">Book Now →</button>
+            </div>
+        </div>
+
+        <!-- Demand Meter -->
+        <div class="demand-section">
+            <h3>📊 Demand & Pricing Factors</h3>
+            <div class="factors-grid">
+                <div class="factor-card">
+                    <div class="fc-top">
+                        <span class="fc-label">Current Demand</span>
+                        <span class="fc-value" id="demandVal">Moderate</span>
+                    </div>
+                    <div class="meter-bar">
+                        <div class="meter-fill" id="demandFill" style="width: 55%"></div>
+                    </div>
+                    <div class="fc-hint">Higher demand = higher prices</div>
+                </div>
+                <div class="factor-card">
+                    <div class="fc-top">
+                        <span class="fc-label">Season Multiplier</span>
+                        <span class="fc-value" id="seasonVal">1.0x</span>
+                    </div>
+                    <div class="meter-bar">
+                        <div class="meter-fill orange" id="seasonFill" style="width: 40%"></div>
+                    </div>
+                    <div class="fc-hint" id="seasonHint">Normal pricing period</div>
+                </div>
+                <div class="factor-card">
+                    <div class="fc-top">
+                        <span class="fc-label">Booking Window</span>
+                        <span class="fc-value" id="windowVal">18 days</span>
+                    </div>
+                    <div class="meter-bar">
+                        <div class="meter-fill green" id="windowFill" style="width: 70%"></div>
+                    </div>
+                    <div class="fc-hint">Earlier booking = better price</div>
+                </div>
+                <div class="factor-card">
+                    <div class="fc-top">
+                        <span class="fc-label">Seats Available</span>
+                        <span class="fc-value" id="seatsVal">42 seats</span>
+                    </div>
+                    <div class="meter-bar">
+                        <div class="meter-fill red" id="seatsFill" style="width: 30%"></div>
+                    </div>
+                    <div class="fc-hint">Fewer seats remaining = surge</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Price History Chart -->
+        <div class="chart-section">
+            <div class="chart-header">
+                <h3>📈 Price History — Last 30 Days</h3>
+                <div class="chart-legend">
+                    <span class="legend-dot blue"></span><span>Economy</span>
+                    <span class="legend-dot orange"></span><span>Business</span>
+                </div>
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="priceChart"></canvas>
+            </div>
+            <div class="chart-stats" id="chartStats">
+                <div class="cs-item"><div class="cs-val" id="minPrice">₹3,200</div><div class="cs-label">30-Day Low</div></div>
+                <div class="cs-item"><div class="cs-val" id="avgPrice">₹4,750</div><div class="cs-label">Average</div></div>
+                <div class="cs-item"><div class="cs-val" id="maxPrice">₹7,900</div><div class="cs-label">30-Day High</div></div>
+                <div class="cs-item"><div class="cs-val" id="trendVal">↗ Rising</div><div class="cs-label">Trend</div></div>
+            </div>
+        </div>
+
+        <!-- Price Alerts -->
+        <div class="alerts-section">
+            <h3>🔔 Price Alert</h3>
+            <p>Get notified when the price drops to your target.</p>
+            <div class="alert-form">
+                <input type="number" id="targetPrice" placeholder="Your target price (₹)">
+                <button id="setAlertBtn" onclick="PricingEngine.setAlert()">Set Alert</button>
+            </div>
+            <div class="active-alerts" id="activeAlerts"></div>
+        </div>
+
+        <!-- Prediction Box -->
+        <div class="prediction-section">
+            <h3>🤖 AI Price Prediction</h3>
+            <div class="prediction-grid" id="predictionGrid">
+                <!-- filled by JS -->
+            </div>
+        </div>
+
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="footer-bottom"><p>© 2026 TripSmart · Dynamic Pricing Engine</p></div>
+</footer>
+
+<script src="js/pricing.js"></script>
+<script>
+document.getElementById('hamburger').addEventListener('click', function() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+});
+// Set today's date as default
+var today = new Date();
+today.setDate(today.getDate() + 18);
+document.getElementById('travelDate').value = today.toISOString().split('T')[0];
+</script>
+</body>
+</html>

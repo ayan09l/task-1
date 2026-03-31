@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TripSmart Hotel Search & Booking - Browse, filter, and book hotels with real-time availability, price comparison, and amenities filters.">
+    <title>Hotel Search & Booking — TripSmart</title>
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/hotels.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo"><span class="logo-icon">✈</span><span class="logo-name">TripSmart</span></a>
+        <div class="nav-links">
+            <a href="flights.html">✈ Flights</a>
+            <a href="pricing.html">💰 Pricing</a>
+            <a href="recommendations.html">⭐ For You</a>
+            <a href="reviews.html">📝 Reviews</a>
+            <a href="itinerary.html">🗺️ Itinerary</a>
+            <a href="hotels.html" class="active">🏨 Hotels</a>
+        </div>
+        <button class="hamburger" id="hamburger">☰</button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="flights.html">✈ Flights</a>
+        <a href="pricing.html">💰 Pricing</a>
+        <a href="recommendations.html">⭐ For You</a>
+        <a href="reviews.html">📝 Reviews</a>
+        <a href="itinerary.html">🗺️ Itinerary</a>
+        <a href="hotels.html">🏨 Hotels</a>
+    </div>
+</nav>
+
+<main class="hotels-main">
+    <!-- Search Bar -->
+    <div class="hotel-search-hero">
+        <div class="hsh-inner">
+            <h1>Find Your <span class="gradient-text">Perfect Stay</span></h1>
+            <div class="hotel-search-form">
+                <div class="hsf-group">
+                    <label>📍 Destination</label>
+                    <input type="text" id="hotelCity" placeholder="City or Hotel name" value="Goa">
+                </div>
+                <div class="hsf-group">
+                    <label>📅 Check-in</label>
+                    <input type="date" id="checkIn">
+                </div>
+                <div class="hsf-group">
+                    <label>📅 Check-out</label>
+                    <input type="date" id="checkOut">
+                </div>
+                <div class="hsf-group">
+                    <label>👤 Guests</label>
+                    <select id="guests">
+                        <option>1 Guest</option>
+                        <option selected>2 Guests</option>
+                        <option>3 Guests</option>
+                        <option>4+ Guests</option>
+                    </select>
+                </div>
+                <button class="search-hotel-btn" id="searchHotelBtn">Search Hotels →</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="hotels-container">
+        <div class="hotels-layout">
+
+            <!-- Sidebar Filters -->
+            <aside class="filters-sidebar">
+                <h3>🔧 Filters</h3>
+
+                <div class="filter-section">
+                    <div class="filter-title">Price per Night</div>
+                    <div class="price-range-wrap">
+                        <input type="range" id="priceFilter" min="500" max="25000" value="25000" step="500">
+                        <div class="price-range-labels">
+                            <span>₹500</span>
+                            <span id="priceFilterVal">₹25,000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <div class="filter-title">Star Rating</div>
+                    <div class="star-filter-group">
+                        <label><input type="checkbox" value="5" checked> ⭐⭐⭐⭐⭐ 5 Stars</label>
+                        <label><input type="checkbox" value="4" checked> ⭐⭐⭐⭐ 4 Stars</label>
+                        <label><input type="checkbox" value="3" checked> ⭐⭐⭐ 3 Stars</label>
+                        <label><input type="checkbox" value="2"> ⭐⭐ 2 Stars</label>
+                        <label><input type="checkbox" value="1"> ⭐ 1 Star</label>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <div class="filter-title">Amenities</div>
+                    <div class="amenity-filter-group" id="amenityFilters">
+                        <label><input type="checkbox" value="pool"> 🏊 Pool</label>
+                        <label><input type="checkbox" value="wifi"> 📶 Free WiFi</label>
+                        <label><input type="checkbox" value="spa"> 💆 Spa</label>
+                        <label><input type="checkbox" value="gym"> 🏋️ Gym</label>
+                        <label><input type="checkbox" value="restaurant"> 🍽️ Restaurant</label>
+                        <label><input type="checkbox" value="parking"> 🚗 Parking</label>
+                        <label><input type="checkbox" value="beach"> 🏖️ Beach Access</label>
+                        <label><input type="checkbox" value="ac"> ❄️ Air Conditioning</label>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <div class="filter-title">Hotel Type</div>
+                    <div class="amenity-filter-group">
+                        <label><input type="checkbox" value="resort" checked> Resort</label>
+                        <label><input type="checkbox" value="boutique" checked> Boutique</label>
+                        <label><input type="checkbox" value="budget"> Budget</label>
+                        <label><input type="checkbox" value="apartment"> Apartment</label>
+                    </div>
+                </div>
+
+                <button class="apply-filter-btn" id="applyFiltersBtn">Apply Filters</button>
+            </aside>
+
+            <!-- Results -->
+            <div class="hotels-results">
+                <div class="results-header">
+                    <div class="results-count" id="resultsCount">Showing all hotels</div>
+                    <select id="sortHotels">
+                        <option value="recommended">Recommended</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="rating">Top Rated</option>
+                    </select>
+                </div>
+                <div class="hotels-grid" id="hotelsGrid">
+                    <!-- populated by JS -->
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>
+
+<!-- Booking Modal -->
+<div class="booking-modal" id="bookingModal">
+    <div class="booking-modal-box" id="bookingModalBox">
+        <!-- filled by JS -->
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="footer-bottom"><p>© 2026 TripSmart · Hotel Search & Booking</p></div>
+</footer>
+
+<script src="js/hotels.js"></script>
+<script>
+document.getElementById('hamburger').addEventListener('click', function() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+});
+// Set default dates
+var ci = new Date(); ci.setDate(ci.getDate() + 7);
+var co = new Date(); co.setDate(co.getDate() + 10);
+document.getElementById('checkIn').value = ci.toISOString().split('T')[0];
+document.getElementById('checkOut').value = co.toISOString().split('T')[0];
+</script>
+</body>
+</html>

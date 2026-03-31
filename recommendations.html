@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TripSmart Personalized Recommendations - Hotels, flights, and destinations suggested just for you based on your history and preferences.">
+    <title>Personalized Recommendations — TripSmart</title>
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/recommendations.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo"><span class="logo-icon">✈</span><span class="logo-name">TripSmart</span></a>
+        <div class="nav-links">
+            <a href="flights.html">✈ Flights</a>
+            <a href="pricing.html">💰 Pricing</a>
+            <a href="recommendations.html" class="active">⭐ For You</a>
+            <a href="reviews.html">📝 Reviews</a>
+            <a href="itinerary.html">🗺️ Itinerary</a>
+            <a href="hotels.html">🏨 Hotels</a>
+        </div>
+        <button class="hamburger" id="hamburger">☰</button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="flights.html">✈ Flights</a>
+        <a href="pricing.html">💰 Pricing</a>
+        <a href="recommendations.html">⭐ For You</a>
+        <a href="reviews.html">📝 Reviews</a>
+        <a href="itinerary.html">🗺️ Itinerary</a>
+        <a href="hotels.html">🏨 Hotels</a>
+    </div>
+</nav>
+
+<main class="reco-main">
+    <div class="page-hero">
+        <div class="page-hero-inner">
+            <div class="page-badge">🎯 Personalized For You</div>
+            <h1>Smart <span class="gradient-text">Recommendations</span></h1>
+            <p>We learn from your preferences and past interactions to suggest the best hotels, flights, and destinations just for you.</p>
+        </div>
+    </div>
+
+    <div class="reco-container">
+        <!-- User Preference Setup -->
+        <div class="pref-setup" id="prefSetup">
+            <h3>Tell us what you love 💙</h3>
+            <p>This helps us personalize your picks — the more you share, the better we get.</p>
+            <div class="pref-grid">
+                <div class="pref-group">
+                    <div class="pref-label">Travel Style</div>
+                    <div class="pref-chips" id="styleChips">
+                        <button class="pref-chip active" data-val="beach">🏖️ Beach</button>
+                        <button class="pref-chip" data-val="mountain">🏔️ Mountain</button>
+                        <button class="pref-chip" data-val="city">🏙️ City</button>
+                        <button class="pref-chip" data-val="heritage">🏛️ Heritage</button>
+                        <button class="pref-chip" data-val="nature">🌿 Nature</button>
+                        <button class="pref-chip" data-val="adventure">🧗 Adventure</button>
+                    </div>
+                </div>
+                <div class="pref-group">
+                    <div class="pref-label">Budget Range</div>
+                    <div class="pref-chips" id="budgetChips">
+                        <button class="pref-chip" data-val="budget">💸 Budget</button>
+                        <button class="pref-chip active" data-val="mid">💳 Mid-range</button>
+                        <button class="pref-chip" data-val="luxury">💎 Luxury</button>
+                    </div>
+                </div>
+                <div class="pref-group">
+                    <div class="pref-label">Trip Type</div>
+                    <div class="pref-chips" id="tripChips">
+                        <button class="pref-chip active" data-val="solo">🙋 Solo</button>
+                        <button class="pref-chip" data-val="couple">👫 Couple</button>
+                        <button class="pref-chip" data-val="family">👨‍👩‍👧 Family</button>
+                        <button class="pref-chip" data-val="group">👥 Group</button>
+                    </div>
+                </div>
+            </div>
+            <button class="update-pref-btn" id="updatePrefBtn">Update My Recommendations →</button>
+        </div>
+
+        <!-- Tabs -->
+        <div class="reco-tabs">
+            <button class="reco-tab active" data-cat="all">All</button>
+            <button class="reco-tab" data-cat="destinations">🌍 Destinations</button>
+            <button class="reco-tab" data-cat="hotels">🏨 Hotels</button>
+            <button class="reco-tab" data-cat="flights">✈ Flights</button>
+        </div>
+
+        <!-- Cards Grid -->
+        <div class="reco-grid" id="recoGrid">
+            <!-- populated by JS -->
+        </div>
+
+        <!-- Feedback section -->
+        <div class="feedback-section">
+            <h4>📊 Your Feedback Improves Recommendations</h4>
+            <p>Rate cards as helpful or not — our algorithm learns and adapts in real time.</p>
+            <div class="feedback-stats" id="feedbackStats">
+                <div class="fs-item"><span id="fsHelpful">0</span> Helpful</div>
+                <div class="fs-item"><span id="fsNotHelpful">0</span> Not Helpful</div>
+                <div class="fs-item" id="fsAccuracy">Accuracy: Calibrating...</div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="footer-bottom"><p>© 2026 TripSmart · Personalized Recommendations</p></div>
+</footer>
+
+<!-- Why This tooltip -->
+<div class="why-tooltip" id="whyTooltip"></div>
+
+<script src="js/recommendations.js"></script>
+<script>
+document.getElementById('hamburger').addEventListener('click', function() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+});
+</script>
+</body>
+</html>

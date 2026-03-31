@@ -3,120 +3,276 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Live Flight Status Tracker - Track multiple flights in real-time with status updates, delays, and estimated arrivals.">
-    <title>SkyPulse — Live Flight Tracker</title>
-    <link rel="stylesheet" href="css/style.css">
+    <meta name="description" content="TripSmart - Your all-in-one travel platform with live flight tracking, smart pricing, personalized recommendations, reviews, and trip planning.">
+    <title>TripSmart — Smart Travel Platform</title>
+    <link rel="stylesheet" href="css/home.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='80' font-size='80'>✈</text></svg>">
 </head>
 <body>
 
-    <!-- ========== HEADER ========== -->
-    <header class="app-header">
-        <div class="header-inner">
-            <div class="logo-section">
-                <div class="logo-icon">✈</div>
-                <div class="logo-text">
-                    SkyPulse
-                    <small>Flight Tracker</small>
-                </div>
-            </div>
-
-            <div class="search-wrapper">
-                <span class="search-icon">🔍</span>
-                <input type="text" class="search-bar" id="searchInput" 
-                    placeholder="Search by flight number, city, or airline..." 
-                    autocomplete="off">
-                <div class="search-results" id="searchResults"></div>
-            </div>
-
-            <div class="header-actions">
-                <div class="live-indicator">
-                    <span class="live-dot"></span>
-                    LIVE
-                </div>
-                <div class="live-clock" id="liveClock">--:--:-- --</div>
-                <button class="notif-btn" id="notifPermBtn" title="Enable notifications">🔔</button>
-            </div>
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo">
+            <span class="logo-icon">✈</span>
+            <span class="logo-name">TripSmart</span>
+        </a>
+        <div class="nav-links">
+            <a href="flights.html">✈ Flights</a>
+            <a href="pricing.html">💰 Pricing</a>
+            <a href="recommendations.html">⭐ For You</a>
+            <a href="reviews.html">📝 Reviews</a>
+            <a href="itinerary.html">🗺️ Itinerary</a>
+            <a href="hotels.html">🏨 Hotels</a>
         </div>
-    </header>
+        <button class="hamburger" id="hamburger">☰</button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="flights.html">✈ Live Flights</a>
+        <a href="pricing.html">💰 Dynamic Pricing</a>
+        <a href="recommendations.html">⭐ For You</a>
+        <a href="reviews.html">📝 Reviews</a>
+        <a href="itinerary.html">🗺️ Itinerary</a>
+        <a href="hotels.html">🏨 Hotels</a>
+    </div>
+</nav>
 
-    <!-- ========== MAIN ========== -->
-    <main class="main-content">
-
-        <!-- Stats bar -->
-        <div class="stats-strip" id="statsStrip">
-            <div class="stat-card">
-                <div class="stat-icon blue">📊</div>
-                <div class="stat-info">
-                    <h3 id="statTracking">0</h3>
-                    <p>Tracking</p>
-                </div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon green">✓</div>
-                <div class="stat-info">
-                    <h3 id="statOnTime">0</h3>
-                    <p>On Time</p>
-                </div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon red">⚠</div>
-                <div class="stat-info">
-                    <h3 id="statDelayed">0</h3>
-                    <p>Delayed</p>
-                </div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon purple">✈</div>
-                <div class="stat-info">
-                    <h3 id="statInAir">0</h3>
-                    <p>In Air</p>
-                </div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon green">🛬</div>
-                <div class="stat-info">
-                    <h3 id="statLanded">0</h3>
-                    <p>Landed</p>
-                </div>
-            </div>
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+        <div class="hero-badge">🌍 All-in-One Travel Platform</div>
+        <h1 class="hero-title">Travel Smarter,<br><span class="gradient-text">Not Harder</span></h1>
+        <p class="hero-sub">Real-time flights · Smart pricing · Personalized picks · Trusted reviews · Easy planning</p>
+        <div class="hero-search-bar">
+            <input type="text" placeholder="Where do you want to go?" id="heroSearch">
+            <button class="hero-btn" onclick="window.location.href='recommendations.html'">Explore →</button>
         </div>
-
-        <!-- Tracked flights section -->
-        <div class="section-header">
-            <h2 class="section-title">
-                My Flights 
-                <span class="count-badge" id="flightCount">0</span>
-            </h2>
-            <div class="filter-tabs" id="filterTabs">
-                <button class="filter-tab active" data-filter="all">All</button>
-                <button class="filter-tab" data-filter="active">Active</button>
-                <button class="filter-tab" data-filter="delayed">Delayed</button>
-                <button class="filter-tab" data-filter="completed">Completed</button>
-            </div>
-        </div>
-
-        <div class="flights-grid" id="flightsGrid">
-            <!-- cards render here -->
-        </div>
-
-    </main>
-
-    <!-- ========== FLIGHT DETAIL MODAL ========== -->
-    <div class="modal-overlay" id="flightModal">
-        <div class="modal-container" id="modalContent">
-            <!-- populated by JS -->
+        <div class="hero-stats">
+            <div class="hero-stat"><strong>50K+</strong><span>Routes</span></div>
+            <div class="hero-stat-div"></div>
+            <div class="hero-stat"><strong>1.2M+</strong><span>Travelers</span></div>
+            <div class="hero-stat-div"></div>
+            <div class="hero-stat"><strong>98%</strong><span>Satisfaction</span></div>
         </div>
     </div>
+    <div class="hero-visual">
+        <div class="floating-card card-1">
+            <div class="fc-icon">✈</div>
+            <div class="fc-info">
+                <div class="fc-title">DEL → BOM</div>
+                <div class="fc-sub">Boarding • Gate A3</div>
+            </div>
+            <div class="fc-badge green">On Time</div>
+        </div>
+        <div class="floating-card card-2">
+            <div class="fc-icon">💰</div>
+            <div class="fc-info">
+                <div class="fc-title">Price Drop!</div>
+                <div class="fc-sub">Mumbai → Goa</div>
+            </div>
+            <div class="fc-badge orange">↓ ₹800</div>
+        </div>
+        <div class="floating-card card-3">
+            <div class="fc-icon">⭐</div>
+            <div class="fc-info">
+                <div class="fc-title">Recommended for you</div>
+                <div class="fc-sub">Maldives Beach Resort</div>
+            </div>
+            <div class="fc-badge blue">4.8 ★</div>
+        </div>
+    </div>
+</section>
 
-    <!-- ========== FOOTER ========== -->
-    <footer class="app-footer">
-        <p>SkyPulse Flight Tracker &mdash; Mock API Demo &middot; Built for Internship Project</p>
-    </footer>
+<!-- FEATURES GRID -->
+<section class="features-section">
+    <div class="section-header">
+        <h2>Everything you need to <span class="gradient-text">travel better</span></h2>
+        <p>Six powerful tools, one platform — built for modern travelers</p>
+    </div>
+    <div class="features-grid">
 
-    <!-- Scripts -->
-    <script src="js/mockApi.js"></script>
-    <script src="js/notifications.js"></script>
-    <script src="js/app.js"></script>
+        <a href="flights.html" class="feature-card fc-flights">
+            <div class="fc-card-icon">✈</div>
+            <div class="fc-card-tag">Live</div>
+            <h3>Live Flight Status</h3>
+            <p>Track real-time flight updates with status changes, delay reasons, gate info, and push notifications.</p>
+            <div class="fc-card-footer">
+                <span class="fc-pill">Mock API</span>
+                <span class="fc-pill">Push Notifications</span>
+                <span class="fc-pill">Multi-Track</span>
+            </div>
+            <div class="fc-arrow">→</div>
+        </a>
+
+        <a href="pricing.html" class="feature-card fc-pricing">
+            <div class="fc-card-icon">💰</div>
+            <div class="fc-card-tag">Smart</div>
+            <h3>Dynamic Pricing Engine</h3>
+            <p>AI-powered pricing that adjusts based on demand, seasons, and trends. View full price history graphs.</p>
+            <div class="fc-card-footer">
+                <span class="fc-pill">Price History</span>
+                <span class="fc-pill">Peak Detection</span>
+                <span class="fc-pill">+20% Peak</span>
+            </div>
+            <div class="fc-arrow">→</div>
+        </a>
+
+        <a href="recommendations.html" class="feature-card fc-reco">
+            <div class="fc-card-icon">🎯</div>
+            <div class="fc-card-tag">Personalized</div>
+            <h3>Smart Recommendations</h3>
+            <p>Hotels, flights & destinations suggested just for you. "Why this?" tooltip on every card with feedback loop.</p>
+            <div class="fc-card-footer">
+                <span class="fc-pill">Collaborative Filter</span>
+                <span class="fc-pill">Feedback Loop</span>
+            </div>
+            <div class="fc-arrow">→</div>
+        </a>
+
+        <a href="reviews.html" class="feature-card fc-reviews">
+            <div class="fc-card-icon">⭐</div>
+            <div class="fc-card-tag">Community</div>
+            <h3>Reviews & Ratings</h3>
+            <p>1–5 star ratings, detailed reviews, photo uploads, replies, flag system, and smart sorting & filtering.</p>
+            <div class="fc-card-footer">
+                <span class="fc-pill">Photo Upload</span>
+                <span class="fc-pill">Flag System</span>
+                <span class="fc-pill">Sort & Filter</span>
+            </div>
+            <div class="fc-arrow">→</div>
+        </a>
+
+        <a href="itinerary.html" class="feature-card fc-itinerary">
+            <div class="fc-card-icon">🗺️</div>
+            <div class="fc-card-tag">Planner</div>
+            <h3>Trip Itinerary Builder</h3>
+            <p>Build day-by-day travel plans, add activities, hotels and flights. Export your trip schedule.</p>
+            <div class="fc-card-footer">
+                <span class="fc-pill">Day Planner</span>
+                <span class="fc-pill">Drag & Drop</span>
+                <span class="fc-pill">Export PDF</span>
+            </div>
+            <div class="fc-arrow">→</div>
+        </a>
+
+        <a href="hotels.html" class="feature-card fc-hotels">
+            <div class="fc-card-icon">🏨</div>
+            <div class="fc-card-tag">Book</div>
+            <h3>Hotel Search & Booking</h3>
+            <p>Browse, filter, and book hotels with real-time availability, price comparison, and amenity filters.</p>
+            <div class="fc-card-footer">
+                <span class="fc-pill">Price Compare</span>
+                <span class="fc-pill">Filters</span>
+                <span class="fc-pill">Instant Book</span>
+            </div>
+            <div class="fc-arrow">→</div>
+        </a>
+
+    </div>
+</section>
+
+<!-- LIVE TICKER -->
+<section class="ticker-section">
+    <div class="ticker-label">🔴 LIVE UPDATES</div>
+    <div class="ticker-track">
+        <div class="ticker-inner" id="tickerInner"></div>
+    </div>
+</section>
+
+<!-- WHY US -->
+<section class="why-section">
+    <div class="why-grid">
+        <div class="why-text">
+            <h2>Built for real travelers,<br><span class="gradient-text">not just tourists</span></h2>
+            <p>TripSmart gives you the same tools that airlines and travel agencies use — packed into a clean, simple interface anyone can use.</p>
+            <ul class="why-list">
+                <li>✅ Real-time data with mock API simulation</li>
+                <li>✅ Smart pricing that reflects actual market movement</li>
+                <li>✅ Personalized picks that learn from your behavior</li>
+                <li>✅ Honest reviews from real community members</li>
+                <li>✅ Fully responsive — works on any device</li>
+            </ul>
+            <a href="flights.html" class="cta-btn">Get Started →</a>
+        </div>
+        <div class="why-visual">
+            <div class="stat-box">
+                <div class="stat-num">17+</div>
+                <div class="stat-label">Flight Routes</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-num">96%</div>
+                <div class="stat-label">On-time Alerts</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-num">200+</div>
+                <div class="stat-label">Hotels Listed</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-num">4.9★</div>
+                <div class="stat-label">Avg. Rating</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <span class="logo-icon">✈</span>
+            <span class="logo-name">TripSmart</span>
+            <p>Your smart travel companion — track, plan, book.</p>
+        </div>
+        <div class="footer-links">
+            <h4>Features</h4>
+            <a href="flights.html">Live Flights</a>
+            <a href="pricing.html">Dynamic Pricing</a>
+            <a href="recommendations.html">Recommendations</a>
+            <a href="reviews.html">Reviews</a>
+            <a href="itinerary.html">Itinerary</a>
+            <a href="hotels.html">Hotels</a>
+        </div>
+        <div class="footer-links">
+            <h4>Project</h4>
+            <a href="https://github.com/ayan09l/task-1" target="_blank">GitHub Repo</a>
+            <a href="#">Internship Project</a>
+            <a href="#">Elevanceskills</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2026 TripSmart · Internship Project by Ayush Panigrahi · Built for Elevanceskills</p>
+    </div>
+</footer>
+
+<script>
+// Hamburger menu
+document.getElementById('hamburger').addEventListener('click', function() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+});
+
+// Live ticker
+var tickerItems = [
+    '✈ IndiGo 6E269 DEL→BOM — Boarding at Gate C1',
+    '💰 Mumbai → Goa prices dropped by ₹850 today!',
+    '⭐ New recommendation: Maldives Beach Resort — 4.9★',
+    '✈ Air India AI1120 BOM→BLR — On Time',
+    '🔥 Peak season pricing active: Goa routes +22%',
+    '✈ Vistara UK3404 DEL→BLR — Delayed 30 min (Weather)',
+    '🏨 Hotel Taj Lands End — 2 rooms left!',
+    '💰 Early bird deal: Bangalore → Dubai ₹12,400',
+    '⭐ Your trip to Goa is recommended this weekend!',
+    '✈ Emirates EK1099 BOM→DXB — On Time',
+];
+
+var ticker = document.getElementById('tickerInner');
+var html = '';
+for (var i = 0; i < tickerItems.length; i++) {
+    html += '<span class="ticker-item">' + tickerItems[i] + '</span>';
+}
+// duplicate for seamless loop
+html += html;
+ticker.innerHTML = html;
+</script>
 </body>
 </html>

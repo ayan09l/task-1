@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TripSmart Reviews & Ratings - Read and write detailed reviews for hotels and flights. Rate on 1-5 stars, upload photos, reply to reviews.">
+    <title>Reviews & Ratings — TripSmart</title>
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/reviews.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo"><span class="logo-icon">✈</span><span class="logo-name">TripSmart</span></a>
+        <div class="nav-links">
+            <a href="flights.html">✈ Flights</a>
+            <a href="pricing.html">💰 Pricing</a>
+            <a href="recommendations.html">⭐ For You</a>
+            <a href="reviews.html" class="active">📝 Reviews</a>
+            <a href="itinerary.html">🗺️ Itinerary</a>
+            <a href="hotels.html">🏨 Hotels</a>
+        </div>
+        <button class="hamburger" id="hamburger">☰</button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="flights.html">✈ Flights</a>
+        <a href="pricing.html">💰 Pricing</a>
+        <a href="recommendations.html">⭐ For You</a>
+        <a href="reviews.html">📝 Reviews</a>
+        <a href="itinerary.html">🗺️ Itinerary</a>
+        <a href="hotels.html">🏨 Hotels</a>
+    </div>
+</nav>
+
+<main class="reviews-main">
+    <div class="page-hero">
+        <div class="page-hero-inner">
+            <div class="page-badge">📝 Community Reviews</div>
+            <h1>Honest <span class="gradient-text">Reviews & Ratings</span></h1>
+            <p>Rate hotels and flights on a 1–5 star scale. Write detailed reviews, upload photos, reply to others, and help fellow travelers decide.</p>
+        </div>
+    </div>
+
+    <div class="reviews-container">
+
+        <!-- Write Review -->
+        <div class="write-review-section">
+            <h3>✍️ Write a Review</h3>
+            <div class="wr-form">
+                <div class="wr-row">
+                    <div class="form-group">
+                        <label>What are you reviewing?</label>
+                        <select id="reviewType">
+                            <option value="hotel">Hotel</option>
+                            <option value="flight">Flight</option>
+                            <option value="destination">Destination</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Name of Hotel / Flight / Place</label>
+                        <input type="text" id="reviewSubject" placeholder="e.g. Taj Palace New Delhi, IndiGo 6E269...">
+                    </div>
+                </div>
+                <div class="wr-row">
+                    <div class="form-group">
+                        <label>Your Name</label>
+                        <input type="text" id="reviewerName" placeholder="Your name">
+                    </div>
+                    <div class="form-group">
+                        <label>Your Rating</label>
+                        <div class="star-input" id="starInput">
+                            <span class="star-btn" data-val="1">★</span>
+                            <span class="star-btn" data-val="2">★</span>
+                            <span class="star-btn" data-val="3">★</span>
+                            <span class="star-btn" data-val="4">★</span>
+                            <span class="star-btn" data-val="5">★</span>
+                        </div>
+                        <input type="hidden" id="ratingVal" value="0">
+                    </div>
+                </div>
+                <div class="form-group full">
+                    <label>Review Title</label>
+                    <input type="text" id="reviewTitle" placeholder="Summarize your experience in one line...">
+                </div>
+                <div class="form-group full">
+                    <label>Your Detailed Review</label>
+                    <textarea id="reviewBody" rows="4" placeholder="Share what you loved, what could be better, and any tips for future travelers..."></textarea>
+                </div>
+                <div class="form-group full">
+                    <label>Upload Photos (optional)</label>
+                    <div class="photo-upload-area" id="photoUploadArea">
+                        <input type="file" id="photoInput" accept="image/*" multiple style="display:none">
+                        <div class="pua-content" onclick="document.getElementById('photoInput').click()">
+                            <div class="pua-icon">📸</div>
+                            <div class="pua-text">Click to upload photos<br><span>JPG, PNG up to 5MB</span></div>
+                        </div>
+                        <div class="photo-previews" id="photoPreviews"></div>
+                    </div>
+                </div>
+                <div class="wr-actions">
+                    <button class="submit-review-btn" id="submitReviewBtn">Submit Review →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filter & Sort bar -->
+        <div class="reviews-toolbar">
+            <div class="toolbar-left">
+                <div class="reviews-title-area">
+                    <h3>All Reviews</h3>
+                    <span class="count-badge" id="reviewTotalCount">0</span>
+                </div>
+                <div class="filter-group">
+                    <select id="filterType">
+                        <option value="all">All Types</option>
+                        <option value="hotel">Hotels</option>
+                        <option value="flight">Flights</option>
+                        <option value="destination">Destinations</option>
+                    </select>
+                    <select id="filterStar">
+                        <option value="all">All Ratings</option>
+                        <option value="5">5 Stars</option>
+                        <option value="4">4 Stars</option>
+                        <option value="3">3 Stars</option>
+                        <option value="2">2 Stars</option>
+                        <option value="1">1 Star</option>
+                    </select>
+                </div>
+            </div>
+            <div class="toolbar-right">
+                <label style="font-size:13px;color:var(--muted)">Sort:</label>
+                <select id="sortReviews">
+                    <option value="newest">Newest</option>
+                    <option value="helpful">Most Helpful</option>
+                    <option value="highest">Highest Rated</option>
+                    <option value="lowest">Lowest Rated</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Overall Stats -->
+        <div class="overall-stats" id="overallStats"></div>
+
+        <!-- Reviews List -->
+        <div class="reviews-list" id="reviewsList"></div>
+
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="footer-bottom"><p>© 2026 TripSmart · Reviews & Ratings</p></div>
+</footer>
+
+<script src="js/reviews.js"></script>
+<script>
+document.getElementById('hamburger').addEventListener('click', function() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+});
+</script>
+</body>
+</html>

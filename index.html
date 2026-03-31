@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Live Flight Status Tracker - Track multiple flights in real-time with status updates, delays, and estimated arrivals.">
+    <title>SkyPulse — Live Flight Tracker</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='80' font-size='80'>✈</text></svg>">
+</head>
+<body>
+
+    <!-- ========== HEADER ========== -->
+    <header class="app-header">
+        <div class="header-inner">
+            <div class="logo-section">
+                <div class="logo-icon">✈</div>
+                <div class="logo-text">
+                    SkyPulse
+                    <small>Flight Tracker</small>
+                </div>
+            </div>
+
+            <div class="search-wrapper">
+                <span class="search-icon">🔍</span>
+                <input type="text" class="search-bar" id="searchInput" 
+                    placeholder="Search by flight number, city, or airline..." 
+                    autocomplete="off">
+                <div class="search-results" id="searchResults"></div>
+            </div>
+
+            <div class="header-actions">
+                <div class="live-indicator">
+                    <span class="live-dot"></span>
+                    LIVE
+                </div>
+                <div class="live-clock" id="liveClock">--:--:-- --</div>
+                <button class="notif-btn" id="notifPermBtn" title="Enable notifications">🔔</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ========== MAIN ========== -->
+    <main class="main-content">
+
+        <!-- Stats bar -->
+        <div class="stats-strip" id="statsStrip">
+            <div class="stat-card">
+                <div class="stat-icon blue">📊</div>
+                <div class="stat-info">
+                    <h3 id="statTracking">0</h3>
+                    <p>Tracking</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon green">✓</div>
+                <div class="stat-info">
+                    <h3 id="statOnTime">0</h3>
+                    <p>On Time</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon red">⚠</div>
+                <div class="stat-info">
+                    <h3 id="statDelayed">0</h3>
+                    <p>Delayed</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon purple">✈</div>
+                <div class="stat-info">
+                    <h3 id="statInAir">0</h3>
+                    <p>In Air</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon green">🛬</div>
+                <div class="stat-info">
+                    <h3 id="statLanded">0</h3>
+                    <p>Landed</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tracked flights section -->
+        <div class="section-header">
+            <h2 class="section-title">
+                My Flights 
+                <span class="count-badge" id="flightCount">0</span>
+            </h2>
+            <div class="filter-tabs" id="filterTabs">
+                <button class="filter-tab active" data-filter="all">All</button>
+                <button class="filter-tab" data-filter="active">Active</button>
+                <button class="filter-tab" data-filter="delayed">Delayed</button>
+                <button class="filter-tab" data-filter="completed">Completed</button>
+            </div>
+        </div>
+
+        <div class="flights-grid" id="flightsGrid">
+            <!-- cards render here -->
+        </div>
+
+    </main>
+
+    <!-- ========== FLIGHT DETAIL MODAL ========== -->
+    <div class="modal-overlay" id="flightModal">
+        <div class="modal-container" id="modalContent">
+            <!-- populated by JS -->
+        </div>
+    </div>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="app-footer">
+        <p>SkyPulse Flight Tracker &mdash; Mock API Demo &middot; Built for Internship Project</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/mockApi.js"></script>
+    <script src="js/notifications.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
